@@ -65,7 +65,7 @@ print(mean(decr_bp))
 
 ## Task 2: Data Frames
 
-Create a data frame object with four columns corresponding to your data above: patient, pre_bp, post_bp, and diff_bp
+Create a data frame object with four columns corresponding to your data above: patient, pre_bp, post_bp, and diff_bp.
 
 ```{r}
 treatment_df <- data.frame(patient, pre_bp, post_bp, diff_bp, row.names = NULL)
