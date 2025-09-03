@@ -73,7 +73,7 @@ treatment_df <- data.frame(patient, pre_bp, post_bp, diff_bp, row.names = NULL)
 treatment_df
 ```
 
-Return only rows of the data frame where the diff_bp column is negative. (Use \[ or learn about the subset() function if you’d like. If you use \[, don’t reference the original vector from the first part, access the column of the data frame to make your comparison with 0.)
+Return only rows of the data frame where the diff_bp column is negative.
 
 ```{r}
 
@@ -82,7 +82,7 @@ treatment_df[treatment_df$diff_bp < 0,]
 
 ```
 
-Add a new column to the data frame corresponding to TRUE if the post_bp is less than 120 and FALSE if it is not. Similar to the previous question, don’t reference the original vector from task 1, access the column of the data frame to make your comparison. Recall you can use \$ to access a column. If you reference a column that doesn’t exist and save a vector (of appropriate length in it), that vector becomes a column of your data frame! Use this way of creating the new column.
+Add a new column to the data frame corresponding to TRUE if the post_bp is less than 120 and FALSE if it is not.
 
 ```{r}
 
@@ -90,10 +90,10 @@ treatment_df$PostLess120 <- treatment_df$post_bp < 120
 treatment_df
 ```
 
-Finally, print the data frame out nicely in your final document by modifying the code below appropriately.
+Finally, print the data frame out nicely.
 
 ```{r}
-#colnames(my_df)[2:5] try to remove weird first col
+
 knitr::kable(treatment_df)
 
 ```
@@ -113,7 +113,7 @@ placebo_df$placebo_PostLess120 <-placebo_df$placebo_post_bp < 120
 placebo_df
 ```
 
-Create and store a list with two elements: element 1, treatment, and element 2, placebo, then name the elements of my list.
+Create and store a list with two elements: element 1 = treatment, and element 2 = placebo, then name the elements of the list.
 
 ```{r}
 
