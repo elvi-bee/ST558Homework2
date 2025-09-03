@@ -1,0 +1,140 @@
+---
+title: "ST558HW2_BaseRprogramming"
+format: html
+editor: visual
+---
+
+## Task 1: Vectors
+
+Create vectors for pre- and post-treatment blood pressure measurements:
+
+```{r}
+pre_bp <- c(120, 151, 125, 126, 115, 132, 132, 129, 134, 139, 127, 122, 127, 135, 133, 128, 147, 138, 140, 132)
+post_bp <- c(127, 145, 135, 122, 115, 122, 123, 126, 126, 129, 132, 146, 120, 114, 121, 120, 128, 120, 133, 115)
+```
+
+Generate generic patient names
+
+```{r}
+patient <-paste("Subject", 1:20, sep = "_")
+print(patient)
+
+```
+
+Assign names to both vectors
+
+```{r}
+names(pre_bp) <- patient
+names(post_bp)<- patient
+print(pre_bp)
+print(post_bp)
+```
+
+Calculate change in blood pressure by subtracting post-treatment from pre-treatment measurement, then calculate the average DECREASE (or change) in blood pressure *across all patients*.
+
+```{r}
+diff_bp <- pre_bp - post_bp
+print(mean(diff_bp))
+```
+
+Identify patients (by generic name and index) who experienced a decrease in blood pressure after treatment.
+
+```{r}
+
+#decrBP <- which(BPchange > 0)
+#print(decrBP)
+print(which(diff_bp > 0))
+
+
+```
+
+Subset the vector of differences to only return those that have a positive change.
+
+```{r}
+
+
+decr_bp <- diff_bp[diff_bp > 0]
+print(decr_bp)
+```
+
+Calculate the average decrease in blood pressure for those whose blood pressure decreased.
+
+```{r}
+print(mean(decr_bp))
+```
+
+## Task 2: Data Frames
+
+Create a data frame object with four columns corresponding to your data above: patient, pre_bp, post_bp, and diff_bp
+
+```{r}
+treatment_df <- data.frame(patient, pre_bp, post_bp, diff_bp, row.names = NULL)
+
+treatment_df
+```
+
+Return only rows of the data frame where the diff_bp column is negative. (Use \[ or learn about the subset() function if you’d like. If you use \[, don’t reference the original vector from the first part, access the column of the data frame to make your comparison with 0.)
+
+```{r}
+
+#df[df$x > 1, ]
+treatment_df[treatment_df$diff_bp < 0,]
+
+```
+
+Add a new column to the data frame corresponding to TRUE if the post_bp is less than 120 and FALSE if it is not. Similar to the previous question, don’t reference the original vector from task 1, access the column of the data frame to make your comparison. Recall you can use \$ to access a column. If you reference a column that doesn’t exist and save a vector (of appropriate length in it), that vector becomes a column of your data frame! Use this way of creating the new column.
+
+```{r}
+
+treatment_df$PostLess120 <- treatment_df$post_bp < 120
+treatment_df
+```
+
+Finally, print the data frame out nicely in your final document by modifying the code below appropriately.
+
+```{r}
+#colnames(my_df)[2:5] try to remove weird first col
+knitr::kable(treatment_df)
+
+```
+
+## Task 3: List Practice
+
+```{r}
+placebo_pre_bp <- c(138, 135, 147, 117, 152, 134, 114, 121, 131, 130)
+placebo_post_bp <- c(105, 136, 123, 130, 134, 143, 135, 139, 120, 124)
+placebo_diff <- placebo_pre_bp - placebo_post_bp
+patient <-paste("Subject", 1:10, sep = "_")
+
+placebo_df <- data.frame(patient, placebo_pre_bp, placebo_post_bp, placebo_diff)
+
+placebo_df$placebo_PostLess120 <-placebo_df$placebo_post_bp < 120
+
+placebo_df
+```
+
+Create and store a list with two elements: element 1, treatment, and element 2, placebo, then name the elements of my list.
+
+```{r}
+
+my_list <- list(treatment_df, placebo_df)
+my_list <- list(treatment = treatment_df, placebo = placebo_df)
+
+```
+
+Access the first list element using three different types of syntax (the result can be a list or just the data frame).
+
+```{r}
+my_list[1]
+str(my_list[1])
+my_list$treatment
+
+```
+
+Use your list from question 2. In one line of code, access the pre_bp column of the placebo data frame.
+
+```{r}
+
+my_list[[2]][2]
+
+```
